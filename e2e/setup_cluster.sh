@@ -30,46 +30,62 @@ nodes:
     kubeadmConfigPatches:
     - |
       kind: ClusterConfiguration
+      apiVersion: kubeadm.k8s.io/v1beta4
       apiServer:
         extraArgs:
-          runtime-config: "resource.k8s.io/v1beta1=true"
+          - name: "runtime-config"
+            value: "resource.k8s.io/v1beta1=true"
       scheduler:
         extraArgs:
-          v: "1"
+          - name: "v"
+            value: "1"
       controllerManager:
         extraArgs:
-          v: "1"
+          - name: "v"
+            value: "1"
     - |
       kind: InitConfiguration
+      apiVersion: kubeadm.k8s.io/v1beta4
       nodeRegistration:
         kubeletExtraArgs:
-          v: "1"
+          - name: "v"
+            value: "1"
   - role: worker
     kubeadmConfigPatches:
     - |
       kind: InitConfiguration
+      apiVersion: kubeadm.k8s.io/v1beta4
       nodeRegistration:
         kubeletExtraArgs:
-          pod-manifest-path: "/etc/kubernetes/manifests/"
-          feature-gates: "DynamicResourceAllocation=true,DRAResourceClaimDeviceStatus=true,KubeletPodResourcesDynamicResources=true"
+          - name: "pod-manifest-path"
+            value: "/etc/kubernetes/manifests/"
+          - name: "feature-gates"
+            value: "DynamicResourceAllocation=true,DRAResourceClaimDeviceStatus=true,KubeletPodResourcesDynamicResources=true"
     - |
       kind: JoinConfiguration
+      apiVersion: kubeadm.k8s.io/v1beta4
       nodeRegistration:
         kubeletExtraArgs:
-          v: "1"
+          - name: "v"
+            value: "1"
   - role: worker
     kubeadmConfigPatches:
     - |
       kind: InitConfiguration
+      apiVersion: kubeadm.k8s.io/v1beta4
       nodeRegistration:
         kubeletExtraArgs:
-          pod-manifest-path: "/etc/kubernetes/manifests/"
-          feature-gates: "DynamicResourceAllocation=true,DRAResourceClaimDeviceStatus=true,KubeletPodResourcesDynamicResources=true"
+          - name: "pod-manifest-path"
+            value: "/etc/kubernetes/manifests/"
+          - name: "feature-gates"
+            value: "DynamicResourceAllocation=true,DRAResourceClaimDeviceStatus=true,KubeletPodResourcesDynamicResources=true"
     - |
       kind: JoinConfiguration
+      apiVersion: kubeadm.k8s.io/v1beta4
       nodeRegistration:
         kubeletExtraArgs:
-          v: "1"
+          - name: "v"
+            value: "1"
 # Required by DRA Integration
 ##
 featureGates:
