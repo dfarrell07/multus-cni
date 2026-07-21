@@ -40,6 +40,7 @@ import (
 )
 
 func TestK8sClient(t *testing.T) {
+	t.Setenv("KUBE_FEATURE_WatchListClient", "false")
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "k8sclient")
 }
